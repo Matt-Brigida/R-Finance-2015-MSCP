@@ -64,8 +64,8 @@ alpha3 <- theta[3]
 alpha4 <- theta[4]
 alpha5 <- theta[5]
 alpha6 <- theta[6]
-p11 <- theta[7]
-p22 <- theta[8]
+p11 <- 1 / (1 + exp(-theta[7]))
+p22 <- 1 / (1 + exp(-theta[8]))
 
 dist.1 <- 0
 dist.1 <- (1/(alpha5*sqrt(2*pi)))*exp((-(lnng-alpha1-alpha3*lnoil)^2)/(2*alpha5^2))
@@ -128,7 +128,7 @@ max.lik.optim <- optim(theta.start, lik, lnoil=lnoil, lnng=lnng, hessian=F)
 
 alpha.hat <- c(max.lik.optim$par[1], max.lik.optim$par[2], max.lik.optim$par[3], max.lik.optim$par[4], max.lik.optim$par[5], max.lik.optim$par[6])
 
-p.0.hat <- c(max.lik.optim$par[7], max.lik.optim$par[8])
+p.0.hat <- c(( 1 / (1 + exp(-max.lik.optim$par[7]))), ( 1 / (1 + exp(-max.lik.optim$par[8]))))
 
 ## Create transition matrix
 
