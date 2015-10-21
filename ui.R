@@ -1,6 +1,7 @@
 # ui.R based on RStudio's stockVis app, Shiny lesson 6, here: http://shiny.rstudio.com/tutorial/lesson6/ 
 
 library(shiny)
+library(dygraphs)
 
 shinyUI(fluidPage(
   titlePanel("Markov Switching Cointegrating Equation"),
@@ -44,7 +45,7 @@ sliderInput("init", "Initial State 1 Probability", min = 0, max = 1, value = 0.5
 
   ),
     
-    mainPanel(plotOutput("plot"))
+    mainPanel(dygraphOutput("plot"))
   )
 ))
 

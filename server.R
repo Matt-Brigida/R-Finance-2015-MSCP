@@ -2,6 +2,7 @@
 
 library(EIAdata)
 library(quantmod)
+library(dygraphs)
 
 shinyServer(function(input, output) {
 
@@ -39,7 +40,7 @@ shinyServer(function(input, output) {
     data <- merge.xts(lhs, rhs, join = "inner")
   })
 
-  output$plot <- renderPlot({   
+  output$plot <- renderDygraph({   
     data <- dataInput()
 p.0 <- c(input$init, (1 - input$init))
 
@@ -184,7 +185,10 @@ for (i in 1:(length(lnoil)-1)){
 # print(max.log.lik.value)
 #
 Filtered_Probability_of_State_1 <- as.xts(xi.a.hat[,2], order.by = index(data))    
-       chartSeries(Filtered_Probability_of_State_1, theme = chartTheme("white"), 
-                    type = "line", TA = NULL)
+names(Filtered_Probability_of_State_1) <- c("Probability")
+       # chartSeries(Filtered_Probability_of_State_1, theme = chartTheme("white"), 
+                    # type = "line", TA = NULL)
+dygraph(Filtered_Probability_of_State_1, main = "Filtered Probability of State 1") %>%
+  dyRangeSelector()
   })
 })
